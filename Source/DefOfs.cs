@@ -11,6 +11,7 @@ namespace IconianPsycasts
         public static HediffDef Iconian_AttackSpeedBoost;
         public static ThingDef Iconian_Mine;
         public static ThingDef Iconian_Minefield;
+        public static ThingDef Iconian_Turret;
 
     }
 }

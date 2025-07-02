@@ -14,6 +14,7 @@ namespace IconianPsycasts
 {
     public static class Helper
     {
+        public const int TurretHealthTimeRatio = 90;
         public const float CommonCutoff = 2f;
         public const float RareCutoff = 3f;
         public const float EpicCutoff = 5f;
