@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static RimWorld.EffecterMaintainer;
 using Verse;
-using Ability = VFECore.Abilities.Ability;
+using Ability = VEF.Abilities.Ability;
 using RimWorld.Planet;
 using RimWorld;
 using UnityEngine;

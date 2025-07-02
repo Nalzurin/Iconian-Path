@@ -16,7 +16,7 @@ namespace IconianPsycasts
         public CompExplosive compExplosive => this.TryGetComp<CompExplosive>();
         public override int MinHeat => 25;
         public int Duration = 90000;
-        public override void Tick()
+        protected override void Tick()
         {
             base.Tick();
             if (this.HitPoints == 0)

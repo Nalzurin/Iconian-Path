@@ -63,7 +63,7 @@ namespace IconianPsycasts
             }
         }
 
-        public override void Tick()
+        protected override void Tick()
         {
             if (!base.Spawned)
             {

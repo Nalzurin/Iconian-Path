@@ -3,8 +3,9 @@ using RimWorld;
 using System.Collections.Generic;
 using UnityEngine;
 using Verse;
-using VFECore.Abilities;
-using Ability = VFECore.Abilities.Ability;
+using 
+.Abilities;
+using Ability = VEF.Abilities.Ability;
 using System.Linq;
 
 namespace IconianPsycasts;

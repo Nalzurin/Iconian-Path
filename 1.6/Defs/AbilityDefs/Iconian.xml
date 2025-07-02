@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <!--Mental Abilities-->
-  <VFECore.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+  <VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
     <defName>Iconian_RerollAdultBackgroundCivillian</defName>
     <label>Reroll Civillian</label>
     <description>Placeholder description</description>
@@ -12,7 +12,7 @@
       <canTargetHumans>true</canTargetHumans>
       <canTargetAnimals>false</canTargetAnimals>
       <canTargetMechs>false</canTargetMechs>
-      <canTargetMutants>false</canTargetMutants>
+      <canTargetSubhumans>false</canTargetSubhumans>
     </targetingParameters>
     <targetMode>Humanlike</targetMode>
     <castFleck>PsycastAreaEffect</castFleck>
@@ -72,8 +72,8 @@
         </backgrounds>
       </li>
     </modExtensions>
-  </VFECore.Abilities.AbilityDef>
-  <VFECore.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+  </VEF.Abilities.AbilityDef>
+  <VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
     <defName>Iconian_RerollAdultBackgroundMilitary</defName>
     <label>reroll military</label>
     <description>Placeholder description</description>
@@ -84,7 +84,7 @@
       <canTargetHumans>true</canTargetHumans>
       <canTargetAnimals>false</canTargetAnimals>
       <canTargetMechs>false</canTargetMechs>
-      <canTargetMutants>false</canTargetMutants>
+      <canTargetSubhumans>false</canTargetSubhumans>
     </targetingParameters>
     <targetMode>Humanlike</targetMode>
     <castFleck>PsycastAreaEffect</castFleck>
@@ -149,10 +149,10 @@
         </backgrounds>
       </li>
     </modExtensions>
-  </VFECore.Abilities.AbilityDef>
+  </VEF.Abilities.AbilityDef>
 
   <!--Combat-->
-  <VFECore.Abilities.AbilityDef>
+  <VEF.Abilities.AbilityDef>
     <defName>Iconian_AmbushPortal</defName>
     <label>Ambush portal</label>
     <description>Use the gate network to move behind the target pawn stunning it if targeting enemy and get a melee attack speed boost.</description>
@@ -179,8 +179,8 @@
         <entropyGain>0</entropyGain>
       </li>
     </modExtensions>
-  </VFECore.Abilities.AbilityDef>
-  <VFECore.Abilities.AbilityDef>
+  </VEF.Abilities.AbilityDef>
+  <VEF.Abilities.AbilityDef>
     <defName>Iconian_Minefield</defName>
     <label>mine field</label>
     <description>Placeholder</description>
@@ -209,8 +209,8 @@
         </prerequisites>
       </li>
     </modExtensions>
-  </VFECore.Abilities.AbilityDef>
-  <VFECore.Abilities.AbilityDef>
+  </VEF.Abilities.AbilityDef>
+  <VEF.Abilities.AbilityDef>
     <defName>Iconian_SummonMine</defName>
     <label>Summon Mine</label>
     <description>Placeholder</description>
@@ -241,8 +241,8 @@
         <thingDef>Iconian_TurretMine</thingDef>
       </li>
     </modExtensions>
-  </VFECore.Abilities.AbilityDef>
-  <VFECore.Abilities.AbilityDef>
+  </VEF.Abilities.AbilityDef>
+  <VEF.Abilities.AbilityDef>
     <defName>Iconian_SummonTurret</defName>
     <label>Summon Turret</label>
     <description>Placeholder</description>
@@ -277,5 +277,5 @@
         <thingDef>Iconian_Turret</thingDef>
       </li>
     </modExtensions>
-  </VFECore.Abilities.AbilityDef>
+  </VEF.Abilities.AbilityDef>
 </Defs>

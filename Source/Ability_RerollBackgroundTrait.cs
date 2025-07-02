@@ -10,7 +10,7 @@ using static IconianPsycasts.Helper;
 
 namespace IconianPsycasts
 {
-    public class Ability_RerollBackgroundTrait : VFECore.Abilities.Ability
+    public class Ability_RerollBackgroundTrait : VEF.Abilities.Ability
     {
         Pawn targetPawn;
 

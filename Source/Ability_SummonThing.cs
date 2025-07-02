@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 using UnityEngine;
 using VanillaPsycastsExpanded;
 using Verse;
-using VFECore.Abilities;
+using VEF.Abilities;
 
 namespace IconianPsycasts
 {
-    public class Ability_SummonThing : VFECore.Abilities.Ability
+    public class Ability_SummonThing : VEF.Abilities.Ability
     {
         public override void Tick()
         {
