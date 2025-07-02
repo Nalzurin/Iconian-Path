@@ -30,6 +30,7 @@ namespace IconianPsycasts
                 if(thing is Building_TurretSentry sentry)
                 {
                     sentry.HitPoints = ability.GetDurationForPawn() / 90;
+                    sentry.Duration = ability.GetDurationForPawn() / 90;
                 }
                 IntVec3 cell = AdjustCell(ability, globalTargetInfo.Cell, thing);
                 Effecter portalEffecter = DefOfs.Iconian_TeleportEffect.Spawn(globalTargetInfo.Cell, ability.Caster.Map, new Vector3(0, 3, 0));

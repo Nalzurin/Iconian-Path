@@ -44,9 +44,13 @@ namespace IconianPsycasts
                 {
                     if (compExplosive != null)
                     {
+                        Log.Message("test");
                         CompProperties_Explosive props = (CompProperties_Explosive)compExplosive.props;
-                        props.damageAmountBase *= HitPoints / Duration;
-                        props.explosiveRadius *= HitPoints / Duration;
+                        props.damageAmountBase = (int)(props.damageAmountBase * (HitPoints / (float)Duration));
+                        props.explosiveRadius *= HitPoints / (float)Duration;
+                        Log.Message(props.explosiveRadius);
+                        Log.Message(HitPoints);
+                        Log.Message(Duration);  
                         compExplosive.StartWick();
                     }
                 }
