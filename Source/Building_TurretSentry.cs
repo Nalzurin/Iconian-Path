@@ -52,7 +52,7 @@ namespace IconianPsycasts
         {
             StringBuilder sb = new StringBuilder(base.GetInspectString());
             sb.AppendLine("IconianSentryOwner".Translate(compBreakLink.Pawn.LabelCap));
-            sb.Append("IconianSentryTimeLeft".Translate((Duration * Helper.TurretHealthTimeRatio).ToStringTicksToPeriod()));
+            sb.Append("IconianSentryTimeLeft".Translate((HitPoints * Helper.TurretHealthTimeRatio).ToStringTicksToPeriod()));
             return sb.ToString();
         }
         public override IEnumerable<Gizmo> GetGizmos()
