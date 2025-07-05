@@ -17,15 +17,19 @@ namespace IconianPsycasts
     {
         public CompBreakLinkBuilding compBreakLink => this.TryGetComp<CompBreakLinkBuilding>();
         public CompExplosive compExplosive => this.TryGetComp<CompExplosive>();
-        public CompEquippable compEq;
         public override int MinHeat => 25;
         public int Duration = 90000;
         private int halfHour = 1250;
         public int teleportCooldownTicksTotal = 1250;
         public int teleportCooldownTicksRemaining = 0;
-        public Building_TurretSentry()
+
+        public override void ExposeData()
         {
-            compEq = new CompEquippable();
+            base.ExposeData();
+            Scribe_Values.Look(ref Duration, "Duration");
+            Scribe_Values.Look(ref teleportCooldownTicksTotal, "teleportCooldownTicksTotal");
+            Scribe_Values.Look(ref teleportCooldownTicksRemaining, "teleportCooldownTicksRemaining");
+            
         }
         protected override void Tick()
         {

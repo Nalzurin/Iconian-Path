@@ -12,7 +12,7 @@
   <SettingMovementSpeedBoostDurationSecondsCap>Movement Speed Bonus Duration Cap (in seconds)</SettingMovementSpeedBoostDurationSecondsCap>
   <SettingAttackSpeedBoostDurationSecondsCap>Attack Speed Bonus Duration Cap (in seconds)</SettingAttackSpeedBoostDurationSecondsCap>
   <IconianSentryOwner>Owner: {0}</IconianSentryOwner>
-  <IconianSentryTimeLeft>Time Left: {0}</IconianSentryTimeLeft>
+  <IconianSentryTimeLeft>Time Left: </IconianSentryTimeLeft>
   <IconianSentryExplode>Explode</IconianSentryExplode>
   <IconianSentryExplodeDesc>Order the sentry to self-explode, causing an explosion proportional to the time left</IconianSentryExplodeDesc>
   <IconianSentryTeleport>Teleport</IconianSentryTeleport>
