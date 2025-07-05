@@ -190,6 +190,7 @@
         <startWickHitPointsPercent>0</startWickHitPointsPercent>
       </li>
     </comps>
+
   </ThingDef>
 
   <ThingDef ParentName="Gun_ChargeBlasterHeavyBase">
@@ -223,6 +224,8 @@
         <muzzleFlashScale>18</muzzleFlashScale>
         <consumeFuelPerShot>1</consumeFuelPerShot>
       </li>
+
+
     </verbs>
   </ThingDef>
 

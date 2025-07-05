@@ -88,6 +88,7 @@
     <Compile Include="Ability_SummonThing.cs" />
     <Compile Include="Building_TurretGunSummoned.cs" />
     <Compile Include="Building_TurretSentry.cs" />
+    <Compile Include="Command_Teleport.cs" />
     <Compile Include="CompBreakLinkBuilding.cs" />
     <Compile Include="CompProperties_BreakLinkBuilding.cs" />
     <Compile Include="SummonExtension.cs" />

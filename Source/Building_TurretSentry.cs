@@ -17,15 +17,26 @@ namespace IconianPsycasts
     {
         public CompBreakLinkBuilding compBreakLink => this.TryGetComp<CompBreakLinkBuilding>();
         public CompExplosive compExplosive => this.TryGetComp<CompExplosive>();
+        public CompEquippable compEq;
         public override int MinHeat => 25;
         public int Duration = 90000;
         private int halfHour = 1250;
+        public int teleportCooldownTicksTotal = 1250;
+        public int teleportCooldownTicksRemaining = 0;
+        public Building_TurretSentry()
+        {
+            compEq = new CompEquippable();
+        }
         protected override void Tick()
         {
             base.Tick();
             if (this.HitPoints == 0)
             {
                 Destroy();
+            }
+            if(teleportCooldownTicksRemaining > 0)
+            {
+                teleportCooldownTicksRemaining--;
             }
             if (this.HitPoints > 0 && this.IsHashIntervalTick(Helper.TurretHealthTimeRatio))
             {
@@ -55,6 +66,14 @@ namespace IconianPsycasts
                     }
                 }
             };
+            yield return new Command_Teleport
+            {
+                defaultLabel = "test".Translate(),
+                defaultDesc = "test".Translate(),
+                icon = ContentFinder<Texture2D>.Get("UI/Commands/Attack"),
+                turret = this,
+                range = 54.9f
+            };
             yield return new Command_Target
             {
                 defaultLabel = "IconianSentryTeleport".Translate(),
@@ -63,6 +82,7 @@ namespace IconianPsycasts
                 targetingParams = TargetingParameters.ForDropPodsDestination(),
                 action = delegate(LocalTargetInfo target)
                 {
+   
                     Effecter portalEffecter = DefOfs.Iconian_TeleportEffect.Spawn(PositionHeld, MapHeld, new Vector3(0, 3, 0));
                     Building_TurretSentry thing = (Building_TurretSentry)ThingMaker.MakeThing(def);
                     thing.HitPoints = HitPoints - 1250 / Helper.TurretHealthTimeRatio;
@@ -75,9 +95,6 @@ namespace IconianPsycasts
 
                 }
             };
-
-
         }
-
     }
 }
