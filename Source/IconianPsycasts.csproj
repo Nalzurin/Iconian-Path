@@ -91,6 +91,8 @@
     <Compile Include="Command_Teleport.cs" />
     <Compile Include="CompBreakLinkBuilding.cs" />
     <Compile Include="CompProperties_BreakLinkBuilding.cs" />
+    <Compile Include="HarmonyPatches\HarmonyStarter.cs" />
+    <Compile Include="HarmonyPatches\Patch_TurretSentryInspectPane.cs" />
     <Compile Include="SummonExtension.cs" />
     <Compile Include="DefOfs.cs" />
     <Compile Include="Helper.cs" />

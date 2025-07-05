@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using VanillaPsycastsExpanded;
 using Verse;
+using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
 namespace IconianPsycasts
 {
@@ -19,6 +21,24 @@ namespace IconianPsycasts
         {
             yield return new Command_Action
             {
+                defaultLabel = "IconianSelectCaster".Translate(),
+                defaultDesc = "IconianSelectCasterDesc".Translate(),
+                icon = null,
+                action = delegate
+                {
+                    Find.Selector.ClearSelection();
+                    Find.Selector.Select(Pawn);
+                },
+                onHover = delegate
+                {
+                    if (Pawn != null)
+                    {
+                        GenDraw.DrawArrowPointingAt(Pawn.TrueCenter());
+                    }
+                }
+            };
+            yield return new Command_Action
+            {
                 defaultLabel = Props.gizmoLabel.Translate(),
                 defaultDesc = Props.gizmoDesc.Translate(),
                 icon = ContentFinder<Texture2D>.Get(Props.gizmoImage),
@@ -28,6 +48,7 @@ namespace IconianPsycasts
 
                 }
             };
+
         }
 
 

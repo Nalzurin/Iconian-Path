@@ -11,4 +11,12 @@
   <ErrorUnableToSelectTrait>Unable to select new trait</ErrorUnableToSelectTrait>
   <SettingMovementSpeedBoostDurationSecondsCap>Movement Speed Bonus Duration Cap (in seconds)</SettingMovementSpeedBoostDurationSecondsCap>
   <SettingAttackSpeedBoostDurationSecondsCap>Attack Speed Bonus Duration Cap (in seconds)</SettingAttackSpeedBoostDurationSecondsCap>
+  <IconianSentryOwner>Owner: {0}</IconianSentryOwner>
+  <IconianSentryTimeLeft>Time Left: {0}</IconianSentryTimeLeft>
+  <IconianSentryExplode>Explode</IconianSentryExplode>
+  <IconianSentryExplodeDesc>Order the sentry to self-explode, causing an explosion proportional to the time left</IconianSentryExplodeDesc>
+  <IconianSentryTeleport>Teleport</IconianSentryTeleport>
+  <IconianSentryTeleportDesc>Order the sentry to teleport to a target location in range, consuming half an hour of lifespan</IconianSentryTeleportDesc>
+  <IconianSelectCaster>Select Caster</IconianSelectCaster>
+  <IconianSelectCasterDesc>Select the caster that summoned this turret</IconianSelectCasterDesc>
 </LanguageData>

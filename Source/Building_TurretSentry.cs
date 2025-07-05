@@ -34,7 +34,7 @@ namespace IconianPsycasts
             {
                 Destroy();
             }
-            if(teleportCooldownTicksRemaining > 0)
+            if (teleportCooldownTicksRemaining > 0)
             {
                 teleportCooldownTicksRemaining--;
             }
@@ -43,6 +43,13 @@ namespace IconianPsycasts
                 this.HitPoints--;
             }
 
+        }
+        public override string GetInspectString()
+        {
+            StringBuilder sb = new StringBuilder(base.GetInspectString());
+            sb.AppendLine("IconianSentryOwner".Translate(compBreakLink.Pawn.LabelCap));
+            sb.Append("IconianSentryTimeLeft".Translate((Duration * Helper.TurretHealthTimeRatio).ToStringTicksToPeriod()));
+            return sb.ToString();
         }
         public override IEnumerable<Gizmo> GetGizmos()
         {
@@ -68,32 +75,11 @@ namespace IconianPsycasts
             };
             yield return new Command_Teleport
             {
-                defaultLabel = "test".Translate(),
-                defaultDesc = "test".Translate(),
+                defaultLabel = "IconianSentryTeleport".Translate(),
+                defaultDesc = "IconianSentryTeleportDesc".Translate(),
                 icon = ContentFinder<Texture2D>.Get("UI/Commands/Attack"),
                 turret = this,
                 range = 54.9f
-            };
-            yield return new Command_Target
-            {
-                defaultLabel = "IconianSentryTeleport".Translate(),
-                defaultDesc = "IconianSentryTeleportDesc".Translate(),
-                icon = ContentFinder<Texture2D>.Get("Buildings/AlienLaserTurret_Top"),
-                targetingParams = TargetingParameters.ForDropPodsDestination(),
-                action = delegate(LocalTargetInfo target)
-                {
-   
-                    Effecter portalEffecter = DefOfs.Iconian_TeleportEffect.Spawn(PositionHeld, MapHeld, new Vector3(0, 3, 0));
-                    Building_TurretSentry thing = (Building_TurretSentry)ThingMaker.MakeThing(def);
-                    thing.HitPoints = HitPoints - 1250 / Helper.TurretHealthTimeRatio;
-                    thing.Duration = Duration;
-                    thing.TryGetComp<CompBreakLinkBuilding>().Pawn = compBreakLink.Pawn;
-                    GenSpawn.Spawn(thing, target.Cell, MapHeld);
-                    Effecter portalEffecterTarget = DefOfs.Iconian_TeleportEffect.Spawn(target.Cell, MapHeld, new Vector3(0, 3, 0));
-
-                    this.Destroy(DestroyMode.Vanish);
-
-                }
             };
         }
     }
