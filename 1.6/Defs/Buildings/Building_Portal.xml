@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- Mine/Turret -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>Iconian_PortalSpawner</defName>
+    <label>portal</label>
+    <description>placeholder</description>
+    <thingClass>IconianPsycasts.Building_PortalSpawner</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Buildings/ShieldRegenerator</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.5, 1.5)</drawSize>
+      <drawOffset>(0,0,-0.1)</drawOffset>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <size>(1,1)</size>
+    <statBases>
+      <MaxHitPoints>1000</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Mass>100</Mass>
+      <ShootingAccuracyTurret>0.96</ShootingAccuracyTurret>
+      <Beauty>-20</Beauty>
+    </statBases>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <tickerType>Normal</tickerType>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.85</fillPercent>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <building>
+      <buildingTags>
+        <li>Iconian_PortalSpawner</li>
+      </buildingTags>
+    </building>
+    <uiIconScale>0.95</uiIconScale>
+    <comps>
+      <li Class="IconianPsycasts.CompProperties_BreakLinkBuilding">
+        <gizmoImage>Things/Motes/Explosion</gizmoImage>
+        <gizmoLabel>Iconian_BreakLinkBuilding</gizmoLabel>
+        <gizmoDesc>Iconian_BreakLinkBuildingDesc</gizmoDesc>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="IconianPsycasts.PortalSpawnerExtension">
+        <pawnKindToSpawn></pawnKindToSpawn>
+        <maxSpawns>5</maxSpawns>
+        <spawnInterval>6000</spawnInterval>
+      </li>
+    </modExtensions>
+  </ThingDef>
+</Defs>
