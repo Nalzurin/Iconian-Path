@@ -9,6 +9,9 @@ namespace IconianPsycasts
 {
     public class CompProperties_SummonedEntity : CompProperties
     {
-
+        public CompProperties_SummonedEntity()
+        {
+            compClass = typeof(CompSummonedEntity);
+        }
     }
 }

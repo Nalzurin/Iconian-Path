@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThinkTreeDef>
+    <defName>Iconian_TrashMob</defName>
+    <thinkRoot Class="ThinkNode_Priority">
+      <subNodes>
+        <!-- Despawned -->
+        <li Class="ThinkNode_Subtree">
+          <treeDef>Despawned</treeDef>
+        </li>
+        <li Class="ThinkNode_ConditionalCanDoConstantThinkTreeJobNow">
+          <subNodes>
+            <li Class="JobGiver_SeekAllowedArea" />
+            <li Class="ThinkNode_ConditionalWorkMech">
+              <!-- Combat mechs do patrolling -->
+              <invert>true</invert>
+              <subNodes>
+                <li Class="JobGiver_AIFightEnemies">
+                  <targetAcquireRadius>65</targetAcquireRadius>
+                  <targetKeepRadius>72</targetKeepRadius>
+                </li>
+                <li Class="ThinkNode_Tagger">
+                  <tagToGive>MiscWork</tagToGive>
+                  <subNodes>
+                    <li Class="JobGiver_WanderColony">
+                      <maxDanger>Deadly</maxDanger>
+                      <reportStringOverride TKey="ReportStringPatrolling">Patrolling.</reportStringOverride>
+                    </li>
+                  </subNodes>
+                </li>
+              </subNodes>
+            </li>
+            <li Class="ThinkNode_ConditionalPlayerMech">
+              <subNodes>
+                <li Class="JobGiver_WanderColony" />
+              </subNodes>
+            </li>
+            <li Class="JobGiver_WanderAnywhere" />
+          </subNodes>
+        </li>
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef>
+</Defs>

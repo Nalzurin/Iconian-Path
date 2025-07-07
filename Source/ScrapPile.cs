@@ -7,8 +7,8 @@ using Verse;
 
 namespace IconianPsycasts
 {
-    public class CompSummonedEntity : ThingComp
+    public class ScrapPile : ThingWithComps
     {
-        public ISummonSource summonSource;
+
     }
 }

@@ -50,7 +50,7 @@
     </comps>
     <modExtensions>
       <li Class="IconianPsycasts.PortalSpawnerExtension">
-        <pawnKindToSpawn></pawnKindToSpawn>
+        <pawnKindToSpawn>Iconian_TrashMob</pawnKindToSpawn>
         <maxSpawns>5</maxSpawns>
         <spawnInterval>6000</spawnInterval>
       </li>

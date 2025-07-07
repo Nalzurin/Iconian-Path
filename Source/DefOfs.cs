@@ -12,6 +12,7 @@ namespace IconianPsycasts
         public static ThingDef Iconian_Mine;
         public static ThingDef Iconian_Minefield;
         public static ThingDef Iconian_Turret;
+        public static ThingDef Iconian_ScrapPile;
 
     }
 }

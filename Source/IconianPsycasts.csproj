@@ -94,9 +94,12 @@
     <Compile Include="CompProperties_BreakLinkBuilding.cs" />
     <Compile Include="CompProperties_SummonedEntity.cs" />
     <Compile Include="CompSummonedEntity.cs" />
+    <Compile Include="DeathActionWorker_Scrap.cs" />
     <Compile Include="HarmonyPatches\HarmonyStarter.cs" />
     <Compile Include="HarmonyPatches\Patch_TurretSentryInspectPane.cs" />
+    <Compile Include="ISummonSource.cs" />
     <Compile Include="PortalSpawnerExtension.cs" />
+    <Compile Include="ScrapPile.cs" />
     <Compile Include="SummonExtension.cs" />
     <Compile Include="DefOfs.cs" />
     <Compile Include="Helper.cs" />

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef>
+    <defName>Iconian_ScrapPile</defName>
+    <label>scrappile</label>
+    <description>Placeholder</description>
+    <thingClass>IconianPsycasts.ScrapPile</thingClass>
+    <tickerType>Rare</tickerType>
+    <useHitPoints>true</useHitPoints>
+    <canDeteriorateUnspawned>true</canDeteriorateUnspawned>
+    <deteriorateFromEnvironmentalEffects>false</deteriorateFromEnvironmentalEffects>
+    <graphicData>
+      <texPath>Effects/InkEffect</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(0.75, 0.75)</drawSize>
+    </graphicData>
+    <statBases>
+      <MarketValue>100</MarketValue>
+      <DeteriorationRate>5</DeteriorationRate>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Mass>0.5</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <thingCategories>
+      <li>ItemsMisc</li>
+    </thingCategories>
+    <stackLimit>1</stackLimit>
+    <preventSpawningInResourcePod>true</preventSpawningInResourcePod>
+    <tradeNeverGenerateStacked>true</tradeNeverGenerateStacked>
+    <category>Item</category>
+    <drawerType>MapMeshOnly</drawerType>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <selectable>true</selectable>
+    <altitudeLayer>Item</altitudeLayer>
+    <alwaysHaulable>true</alwaysHaulable>
+    <rotatable>false</rotatable>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <pathCost>14</pathCost>
+    <comps>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Lifespan">
+        <lifespanTicks>10000</lifespanTicks>
+        <expireEffect>RaisedRock_Collapse</expireEffect>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>
