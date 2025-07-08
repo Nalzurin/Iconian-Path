@@ -90,10 +90,14 @@
     <Compile Include="Building_TurretGunSummoned.cs" />
     <Compile Include="Building_TurretSentry.cs" />
     <Compile Include="Command_Teleport.cs" />
+    <Compile Include="CompAbilityEffect_ExplodeLeap.cs" />
     <Compile Include="CompBreakLinkBuilding.cs" />
     <Compile Include="CompProperties_BreakLinkBuilding.cs" />
+    <Compile Include="CompProperties_ExplodeLeap.cs" />
     <Compile Include="CompProperties_SummonedEntity.cs" />
+    <Compile Include="CompProperties_TrashEater.cs" />
     <Compile Include="CompSummonedEntity.cs" />
+    <Compile Include="CompTrashEater.cs" />
     <Compile Include="DeathActionWorker_Scrap.cs" />
     <Compile Include="HarmonyPatches\HarmonyStarter.cs" />
     <Compile Include="HarmonyPatches\Patch_TurretSentryInspectPane.cs" />

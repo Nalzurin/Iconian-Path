@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- Bomber -->
+  <AbilityDef>
+    <defName>IconianLeap_Explode</defName>
+    <label>explode leap</label>
+    <description>Leap onto a target and explode.</description>
+    <cooldownTicksRange>3600</cooldownTicksRange>
+    <!-- 1.44 hours -->
+    <jobDef>CastJump</jobDef>
+    <ai_IsOffensive>true</ai_IsOffensive>
+    <aiCanUse>true</aiCanUse>
+    <warmupMoteSocialSymbol>UI/Abilities/WorkDrive</warmupMoteSocialSymbol>
+    <verbProperties>
+      <verbClass>Verb_CastAbilityJump</verbClass>
+      <label>explode leap</label>
+      <range>20</range>
+      <requireLineOfSight>true</requireLineOfSight>
+      <warmupTime>0.25</warmupTime>
+      <soundCast>Pawn_Devourer_Jump</soundCast>
+      <soundLanding>Pawn_Devourer_Land</soundLanding>
+      <targetParams>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="IconianPsycasts.CompProperties_ExplodeLeap">
+        <radius>16.9</radius>
+        <damage>30</damage>
+        <damageDef>Bomb</damageDef>
+      </li>
+    </comps>
+  </AbilityDef>
+</Defs>

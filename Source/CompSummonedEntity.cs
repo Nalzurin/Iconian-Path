@@ -10,5 +10,6 @@ namespace IconianPsycasts
     public class CompSummonedEntity : ThingComp
     {
         public ISummonSource summonSource;
+
     }
 }

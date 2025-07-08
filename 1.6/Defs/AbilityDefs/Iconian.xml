@@ -307,4 +307,36 @@
       </li>
     </modExtensions>
   </VEF.Abilities.AbilityDef>
+  <VEF.Abilities.AbilityDef>
+    <defName>Iconian_SummonTrashEater</defName>
+    <label>Summon Trash Eater</label>
+    <description>Placeholder</description>
+    <iconPath>Abilities/Iconian/DeployMilitors</iconPath>
+    <abilityClass>IconianPsycasts.Ability_SummonThing</abilityClass>
+    <needsTicking>true</needsTicking>
+    <castTime>150</castTime>
+    <range>45.9</range>
+    <targetMode>Location</targetMode>
+    <modExtensions>
+      <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+        <path>VPE_Iconian</path>
+        <level>2</level>
+        <order>3</order>
+        <psyfocusCost>0.1</psyfocusCost>
+        <entropyGain>25</entropyGain>
+        <prerequisites>
+          <li>Iconian_SummonTrashSpawner</li>
+        </prerequisites>
+      </li>
+      <li Class="IconianPsycasts.SummonExtension">
+        <allowedBuildings>
+          <li MayRequire="kentington.saveourship2">ShipHullTileWrecked</li>
+          <li MayRequire="kentington.saveourship2">ShipHullTile</li>
+          <li MayRequire="kentington.saveourship2">ShipHullTileMech</li>
+          <li MayRequire="kentington.saveourship2">ShipHullTileArchotech</li>
+        </allowedBuildings>
+        <thingDef>Iconian_TrashSpawner</thingDef>
+      </li>
+    </modExtensions>
+  </VEF.Abilities.AbilityDef>
 </Defs>
