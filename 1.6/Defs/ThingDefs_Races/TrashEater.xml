@@ -25,10 +25,19 @@
           <soundCall>Pawn_Mech_Militor_Call</soundCall>
         </li>
       </lifeStageAges>
-      <thinkTreeMain>Iconian_TrashMob</thinkTreeMain>
+      <thinkTreeMain>Mechanoid</thinkTreeMain>
       <thinkTreeConstant>MechConstant</thinkTreeConstant>
       <mechFixedSkillLevel>5</mechFixedSkillLevel>
     </race>
+    <comps Inherit="False">
+      <li Class="IconianPsycasts.CompProperties_TrashEater">
+        <maxStored>4</maxStored>
+        <pawnToSpawn>Iconian_TrashMob</pawnToSpawn>
+        <spawnAbilityCooldownTicks>300</spawnAbilityCooldownTicks>
+        <thingToEat>Iconian_ScrapPile</thingToEat>
+        <gizmoIcon>Abilities/Iconian/DeployMilitors</gizmoIcon>
+      </li>
+    </comps>
   </ThingDef>
   <PawnKindDef ParentName="LightMechanoidKind">
     <defName>Iconian_TrashEater</defName>

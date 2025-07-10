@@ -335,7 +335,7 @@
           <li MayRequire="kentington.saveourship2">ShipHullTileMech</li>
           <li MayRequire="kentington.saveourship2">ShipHullTileArchotech</li>
         </allowedBuildings>
-        <thingDef>Iconian_TrashSpawner</thingDef>
+        <thingDef>Iconian_TrashEater</thingDef>
       </li>
     </modExtensions>
   </VEF.Abilities.AbilityDef>

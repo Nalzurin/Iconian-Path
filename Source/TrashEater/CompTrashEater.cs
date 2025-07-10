@@ -1,26 +1,38 @@
-﻿/*using RimWorld;
+﻿using IconianPsycasts.TrashEater;
+using RimWorld;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using VanillaPsycastsExpanded;
 using Verse;
 using Verse.AI;
 
 namespace IconianPsycasts
 {
+    [StaticConstructorOnStartup]
     public class CompTrashEater : CompSummonedEntity, ISummonSource
     {
-        CompProperties_TrashEater Props => (CompProperties_TrashEater)props;
+        private int DevourCooldownTicksRemaining = 0;
+        private int DevourCooldownTicks = 300;
+        private TrashEaterGizmo gizmo;
+        public CompProperties_TrashEater Props => (CompProperties_TrashEater)props;
         private List<Thing> summonList = [];
         public List<Thing> SummonListForReading => summonList;
 
         private int cooldownTicksRemaining;
         private int cooldownTicks => Props.spawnAbilityCooldownTicks;
-        private int maxStored => Props.maxStored;
-        private int currentStored = 0;
+        public int maxStored => Props.maxStored;
+        public int currentStored = 0;
+        public int maxToFill;
+        public int AmountToAutofill => Mathf.Max(0, maxToFill - currentStored);
+        public float PercentageFull => (float)currentStored / (float)maxStored;
         private PawnKindDef pawnToSummon => Props.pawnToSpawn;
+
         public AcceptanceReport CanSpawn()
         {
             if (parent is Pawn pawn)
@@ -84,46 +96,32 @@ namespace IconianPsycasts
             {
                 if (gizmo == null)
                 {
-                    gizmo = new MechCarrierChoiceGizmo(this);
+                    gizmo = new TrashEaterGizmo(this);
                 }
                 yield return gizmo;
             }
 
-            if (innerContainer.Any())
+            AcceptanceReport canSpawn = CanSpawn();
+            Command_ActionWithCooldown act = new Command_ActionWithCooldown
             {
-                Command_Action command_Action4 = new Command_Action();
-                command_Action4.defaultLabel = "CommandEjectContents".Translate();
-                command_Action4.icon = ContentFinder<Texture2D>.Get("UI/Icons/EjectContentFromAtomizer");
-                command_Action4.action = delegate
+                cooldownPercentGetter = () => Mathf.InverseLerp(Props.spawnAbilityCooldownTicks, 0f, cooldownTicksRemaining),
+                action = delegate
                 {
-                    innerContainer.TryDropAll(parent.Position, parent.Map, ThingPlaceMode.Near);
-                };
-                yield return command_Action4;
-            }
+                    TrySpawnPawn();
+                },
+                //hotKey = KeyBindingDefOf.Misc2,
+                Disabled = !canSpawn.Accepted,
+                icon = ContentFinder<Texture2D>.Get(Props.gizmoIcon),
+                defaultLabel = "IconianSummonPawn".Translate(pawnToSummon.labelPlural),
+                defaultDesc = "IconianSummonPawnDec".Translate(pawnToSummon.labelPlural, Props.thingToEat.label)
+            };
 
-            foreach (WorkqueenSpawnerdef spawnerdef in Props.workqueenSpawnerdefs)
+            if (!canSpawn.Reason.NullOrEmpty())
             {
-                AcceptanceReport canSpawn = CanSpawn(spawnerdef);
-                Command_ActionWithCooldown act = new Command_ActionWithCooldown
-                {
-                    cooldownPercentGetter = () => Mathf.InverseLerp(Props.cooldownTicks, 0f, cooldownTicksRemaining),
-                    action = delegate
-                    {
-                        TrySpawnPawns(spawnerdef);
-                    },
-                    //hotKey = KeyBindingDefOf.Misc2,
-                    Disabled = !canSpawn.Accepted,
-                    icon = ContentFinder<Texture2D>.Get(spawnerdef.GizmoTexPath),
-                    defaultLabel = "MechCarrierRelease".Translate(spawnerdef.spawnPawnKind.labelPlural),
-                    defaultDesc = "MechCarrierDesc".Translate(spawnerdef.maxPawnsToSpawn, spawnerdef.spawnPawnKind.labelPlural, spawnerdef.spawnPawnKind.label, spawnerdef.costPerPawn, Props.fixedIngredient.label)
-                };
-
-                if (!canSpawn.Reason.NullOrEmpty())
-                {
-                    act.Disable(canSpawn.Reason);
-                }
-                yield return act;
+                act.Disable(canSpawn.Reason);
             }
+            yield return act;
+
 
             // devour ability
             Command_ActionWithCooldown forceRefill = new Command_ActionWithCooldown
@@ -135,67 +133,30 @@ namespace IconianPsycasts
                     {
                         Pawn p = (Pawn)parent;
 
-                        List<Thing> listDevourableUrchins = UrchinDevourHelper.ListDevourableUrchins(this, pawn);
+                        List<Thing> listEatableThings = ListEatableThings(p);
 
-                        if (!listDevourableUrchins.NullOrEmpty())
+                        if (!listEatableThings.NullOrEmpty())
                         {
-                            Job job = UrchinDevourHelper.HaulToDevourJob(pawn, listDevourableUrchins[0], parent);
-                            job.count = Mathf.Min(job.count, UrchinDevourHelper.AmountToDevourIgnoreAutofill(this));
-                            job.targetQueueB = (from i in listDevourableUrchins.Skip(1)
+                            Job job = HaulToEatJob(pawn, listEatableThings[0]);
+                            job.count = Mathf.Min(job.count, AmountToAutofill);
+                            job.targetQueueB = (from i in listEatableThings.Skip(1)
                                                 select new LocalTargetInfo(i)).ToList();
-
-                            //p.jobs.StartJob(job); //throws dev warnings
 
                             if (job.count > 0)
                             {
                                 p.jobs.TryTakeOrderedJob(job, JobTag.MiscWork, false);
                             }
 
-                            *//*
-                            WorkGiver_HaulToDevour workGiver = new WorkGiver_HaulToDevour();    // gives nullpointer here
-
-                            if(workGiver == null)
-                            {
-                                Log.Warning("workGiver is null");
-                            }
-                            if (listDevourableUrchins[0].PositionHeld == null)
-                            {
-                                Log.Warning("listDevourableUrchins[0].PositionHeld is null");
-                            }
-                           
-                            p.jobs.TryTakeOrderedJobPrioritizedWork(job, workGiver, listDevourableUrchins[0].PositionHeld);
-                             *//*
                         }
                     }
                 },
 
-                Disabled = !UrchinDevourHelper.DevourIsValidIgnoreAutofill(this), // !canSpawn.Accepted,
+                Disabled = currentStored == maxStored, // !canSpawn.Accepted,
                 icon = ContentFinder<Texture2D>.Get("UI/Gizmos/AV_DevourUrchin"),
                 defaultLabel = "AV_DevourUrchins".Translate(),
                 defaultDesc = "AV_DevourUrchins_Description".Translate()
             };
             yield return forceRefill;
-
-            //autocast switch
-
-            Command_Toggle spawnToggle = new Command_Toggle();
-
-            if (lastSpawnerdef == null)
-            {
-                spawnToggle.defaultLabel = "AV_AutocastUrchins".Translate() + "AV_Urchins".Translate();
-            }
-            else
-            {
-                spawnToggle.defaultLabel = "AV_AutocastUrchins".Translate() + lastSpawnerdef.spawnPawnKind.label;
-            }
-
-            spawnToggle.icon = ContentFinder<Texture2D>.Get("UI/Gizmos/AV_UrchinAutocast");
-            spawnToggle.defaultDesc = "AV_AutocastUrchins_Description".Translate();
-            spawnToggle.toggleAction = () => AllowedToAutocast = !AllowedToAutocast;
-            spawnToggle.isActive = (() => AllowedToAutocast);
-
-            yield return spawnToggle;
-
 
             if (DebugSettings.ShowDevGizmos)
             {
@@ -203,35 +164,71 @@ namespace IconianPsycasts
                 {
                     Command_Action command_Action = new Command_Action();
                     command_Action.defaultLabel = "DEV: Reset cooldown";
-                    command_Action.action = delegate    
+                    command_Action.action = delegate
                     {
                         cooldownTicksRemaining = 0;
                     };
                     yield return command_Action;
                 }
                 Command_Action command_Action2 = new Command_Action();
-                command_Action2.defaultLabel = "DEV: Fill with " + Props.fixedIngredient.label;
+                command_Action2.defaultLabel = "DEV: Fill with " + Props.thingToEat.label;
                 command_Action2.action = delegate
                 {
-                    while (IngredientCount < Props.maxIngredientCount)
-                    {
-                        int stackCount = Mathf.Min(Props.maxIngredientCount - IngredientCount, Props.fixedIngredient.stackLimit);
-                        Thing thing = ThingMaker.MakeThing(Props.fixedIngredient);
-                        thing.stackCount = stackCount;
-                        innerContainer.TryAdd(thing, thing.stackCount);
-                    }
+                    currentStored = maxStored;
                 };
                 yield return command_Action2;
                 Command_Action command_Action3 = new Command_Action();
-                command_Action3.defaultLabel = "DEV: Empty " + Props.fixedIngredient.label;
+                command_Action3.defaultLabel = "DEV: Empty " + Props.thingToEat.label;
                 command_Action3.action = delegate
                 {
-                    innerContainer.ClearAndDestroyContents();
+                    currentStored = 0;
                 };
                 yield return command_Action3;
             }
         }
 
+        private Job HaulToEatJob(Pawn pawn, Thing thing)
+        {
+            Job job = JobMaker.MakeJob(DefOfs.Iconian_HaulToEat, thing);
+            job.count = Mathf.Min(thing.stackCount, AmountToAutofill);
+
+            job.haulMode = HaulMode.ToContainer;
+
+            return job;
+        }
+
+        private List<Thing> ListEatableThings(Pawn p)
+        {
+            return HaulAIUtility.FindFixedIngredientCount(p, Props.thingToEat, 1);
+        }
+
+        public override void PostDrawExtraSelectionOverlays()
+        {
+            if (!Find.Selector.IsSelected(parent))
+            {
+                return;
+            }
+            for (int i = 0; i < summonList.Count; i++)
+            {
+                if (!summonList[i].DestroyedOrNull() && parent.Map == summonList[i].Map)
+                {
+                    GenDraw.DrawLineBetween(parent.TrueCenter(), summonList[i].TrueCenter());
+                }
+            }
+        }
+
+        public override void PostExposeData()
+        {
+            base.PostExposeData();
+            Scribe_Values.Look(ref cooldownTicksRemaining, "cooldownTicksRemaining", 0);
+            Scribe_Values.Look(ref maxToFill, "maxToFill", 0);
+            Scribe_Collections.Look(ref summonList, "summonList", LookMode.Reference);
+            Scribe_Values.Look(ref currentStored, "currentStored", 0);
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                summonList.RemoveAll((Thing x) => x == null);
+            }
+        }
+
     }
 }
-*/

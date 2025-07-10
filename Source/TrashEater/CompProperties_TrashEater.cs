@@ -1,4 +1,4 @@
-﻿/*using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +12,11 @@ namespace IconianPsycasts
         public int maxStored = 4;
         public PawnKindDef pawnToSpawn;
         public int spawnAbilityCooldownTicks = 300;
+        public ThingDef thingToEat;
+        public string gizmoIcon;
         CompProperties_TrashEater()
         {
             compClass = typeof(CompTrashEater);
         }
     }
-}*/
+}
