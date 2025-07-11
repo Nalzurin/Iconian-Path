@@ -1,5 +1,4 @@
-﻿using IconianPsycasts.TrashEater;
-using RimWorld;
+﻿using RimWorld;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -37,11 +36,8 @@ namespace IconianPsycasts
         {
             if (parent is Pawn pawn)
             {
-                if (pawn.IsSelfShutdown())
-                {
-                    return "SelfShutdown".Translate();
-                }
-                if (pawn.Faction == Faction.OfPlayer && !pawn.IsColonyMechPlayerControlled)
+ 
+                if (pawn.Faction != Faction.OfPlayer)
                 {
                     return false;
                 }
@@ -84,7 +80,7 @@ namespace IconianPsycasts
         }
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
-            if (!(parent is Pawn pawn) || !pawn.IsColonyMech || pawn.GetOverseer() == null)
+            if (!(parent is Pawn pawn))
             {
                 yield break;
             }
@@ -137,7 +133,7 @@ namespace IconianPsycasts
 
                         if (!listEatableThings.NullOrEmpty())
                         {
-                            Job job = HaulToEatJob(pawn, listEatableThings[0]);
+                            Job job = EatThingJob(pawn, listEatableThings[0]);
                             job.count = Mathf.Min(job.count, AmountToAutofill);
                             job.targetQueueB = (from i in listEatableThings.Skip(1)
                                                 select new LocalTargetInfo(i)).ToList();
@@ -152,9 +148,9 @@ namespace IconianPsycasts
                 },
 
                 Disabled = currentStored == maxStored, // !canSpawn.Accepted,
-                icon = ContentFinder<Texture2D>.Get("UI/Gizmos/AV_DevourUrchin"),
-                defaultLabel = "AV_DevourUrchins".Translate(),
-                defaultDesc = "AV_DevourUrchins_Description".Translate()
+                icon = ContentFinder<Texture2D>.Get(Props.gizmoIcon),
+                defaultLabel = "Iconian_EatScrap".Translate(),
+                defaultDesc = "Iconian_EatScrapDesc".Translate()
             };
             yield return forceRefill;
 
@@ -187,9 +183,9 @@ namespace IconianPsycasts
             }
         }
 
-        private Job HaulToEatJob(Pawn pawn, Thing thing)
+        private Job EatThingJob(Pawn pawn, Thing thing)
         {
-            Job job = JobMaker.MakeJob(DefOfs.Iconian_HaulToEat, thing);
+            Job job = JobMaker.MakeJob(DefOfs.Iconian_EatThingForced, thing, this.parent);
             job.count = Mathf.Min(thing.stackCount, AmountToAutofill);
 
             job.haulMode = HaulMode.ToContainer;
@@ -216,7 +212,18 @@ namespace IconianPsycasts
                 }
             }
         }
-
+        public override void CompTick()
+        {
+            base.CompTick();
+            if(DevourCooldownTicksRemaining > 0)
+            {
+                DevourCooldownTicksRemaining--;
+            }
+            if (cooldownTicksRemaining > 0)
+            {
+                cooldownTicksRemaining--;
+            }
+        }
         public override void PostExposeData()
         {
             base.PostExposeData();

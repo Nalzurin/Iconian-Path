@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
   <JobDef>
-    <defName>Iconian_HaulToEat</defName>
-    <driverClass>IconianPsycasts.JobDriver_HaulToEat</driverClass>
+    <defName>Iconian_EatThing</defName>
+    <driverClass>IconianPsycasts.JobDriver_EatThing</driverClass>
+    <reportString>eating TargetA.</reportString>
+    <suspendable>false</suspendable>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+  <JobDef>
+    <defName>Iconian_EatThingForced</defName>
+    <driverClass>IconianPsycasts.JobDriver_EatThingForced</driverClass>
     <reportString>eating TargetA.</reportString>
     <suspendable>false</suspendable>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>

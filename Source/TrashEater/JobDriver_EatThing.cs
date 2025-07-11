@@ -8,7 +8,7 @@ using UnityEngine;
 using Verse.AI;
 using Verse;
 
-namespace IconianPsycasts.TrashEater
+namespace IconianPsycasts
 {
     internal class JobDriver_EatThing : JobDriver
     {
@@ -33,7 +33,7 @@ namespace IconianPsycasts.TrashEater
         {
             this.FailOnDestroyedOrNull(TargetIndex.A);
             this.FailOnForbidden(TargetIndex.A);
-            this.FailOn(() => comp.maxToFill == comp.maxStored);
+            this.FailOn(() => comp.maxToFill == 0);
             Toil getToEatTarget = Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.ClosestTouch, canGotoSpawnedParent: true);
             Toil startEatingTarget = Toils_Haul.StartCarryThing(TargetIndex.A);
             startEatingTarget.AddFinishAction(delegate
@@ -43,7 +43,7 @@ namespace IconianPsycasts.TrashEater
 
                     if (!ThingToEat.IsForbidden(pawn.Faction))
                     {
-                        comp.currentStored += job.count;
+                        comp.currentStored += ThingToEat.stackCount;
                         ThingToEat.Destroy();
                         Duration = 240;
 
@@ -56,6 +56,12 @@ namespace IconianPsycasts.TrashEater
                 }
             });
             yield return getToEatTarget;
+            yield return startEatingTarget;
+            Toil toil = Toils_General.Wait(Duration, TargetIndex.B);
+            toil.WithProgressBarToilDelay(TargetIndex.B);
+
+            yield return toil;
+
         }
     }
 }

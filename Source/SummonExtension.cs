@@ -17,25 +17,41 @@ namespace IconianPsycasts
     {
         public List<ThingDef> allowedBuildings;
         public ThingDef thingDef;
+        public PawnKindDef pawnDef;
         public override void Cast(GlobalTargetInfo[] targets, Ability ability)
         {
             base.Cast(targets, ability);
             foreach (GlobalTargetInfo globalTargetInfo in targets)
             {
-                Thing thing = ThingMaker.MakeThing(thingDef);
-                if (thing.HasComp<CompBreakLinkBuilding>())
+                if(thingDef != null)
                 {
-                    thing.TryGetComp<CompBreakLinkBuilding>().Pawn = ability.CasterPawn;
+                    Thing thing = ThingMaker.MakeThing(thingDef);
+                    if (thing.HasComp<CompBreakLinkBuilding>())
+                    {
+                        thing.TryGetComp<CompBreakLinkBuilding>().Pawn = ability.CasterPawn;
+                    }
+                    if (thing is Building_TurretSentry sentry)
+                    {
+                        sentry.HitPoints = ability.GetDurationForPawn() / Helper.TurretHealthTimeRatio;
+                        sentry.Duration = ability.GetDurationForPawn() / Helper.TurretHealthTimeRatio;
+                    }
+                    IntVec3 cell = AdjustCell(ability, globalTargetInfo.Cell, thing);
+                    Effecter portalEffecter = DefOfs.Iconian_TeleportEffect.Spawn(globalTargetInfo.Cell, ability.Caster.Map, new Vector3(0, 3, 0));
+                    ability.AddEffecterToMaintain(portalEffecter, globalTargetInfo.Cell, 180, ability.Caster.Map);
+                    TeleportThing(ability, cell, thing);
                 }
-                if(thing is Building_TurretSentry sentry)
+                if(pawnDef != null)
                 {
-                    sentry.HitPoints = ability.GetDurationForPawn() / Helper.TurretHealthTimeRatio;
-                    sentry.Duration = ability.GetDurationForPawn() / Helper.TurretHealthTimeRatio;
+                    Pawn thing = PawnGenerator.GeneratePawn(pawnDef, ability.Caster.Faction);
+                    if (thing.HasComp<CompBreakLink>())
+                    {
+                        thing.TryGetComp<CompBreakLink>().Pawn = ability.pawn;
+                    }
+                    IntVec3 cell = AdjustCell(ability, globalTargetInfo.Cell, thing);
+                    Effecter portalEffecter = DefOfs.Iconian_TeleportEffect.Spawn(globalTargetInfo.Cell, ability.Caster.Map, new Vector3(0, 3, 0));
+                    ability.AddEffecterToMaintain(portalEffecter, globalTargetInfo.Cell, 180, ability.Caster.Map);
+                    TeleportThing(ability, cell, thing);
                 }
-                IntVec3 cell = AdjustCell(ability, globalTargetInfo.Cell, thing);
-                Effecter portalEffecter = DefOfs.Iconian_TeleportEffect.Spawn(globalTargetInfo.Cell, ability.Caster.Map, new Vector3(0, 3, 0));
-                ability.AddEffecterToMaintain(portalEffecter, globalTargetInfo.Cell, 180, ability.Caster.Map);
-                TeleportThing(ability, cell, thing);
 
             }
         }
@@ -44,7 +60,8 @@ namespace IconianPsycasts
         {
             if (thing.def.CanHaveFaction)
             {
-                thing.SetFaction(ability.pawn.Faction);
+                Log.Message(thing == null);
+                thing.SetFactionDirect(ability.pawn.Faction);
             }
 
             GenPlace.TryPlaceThing(thing, cellToTeleport, ability.pawn.Map, ThingPlaceMode.Direct);

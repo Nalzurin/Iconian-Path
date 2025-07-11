@@ -19,12 +19,10 @@
         <li Class="ThinkNode_Subtree">
           <treeDef>LordDuty</treeDef>
         </li>
-
-        <!-- explode leap a target -->
-        <li Class="JobGiver_AIAbilityFight">
-          <targetAcquireRadius>80</targetAcquireRadius>
-          <targetKeepRadius>100</targetKeepRadius>
-          <ability>IconianLeap_Explode</ability>
+        <!-- Keep distance -->
+        <li Class="JobGiver_FleeForDistance">
+          <enemyDistToFleeRange>2.9~7.9</enemyDistToFleeRange>
+          <fleeDistRange>13.5~20</fleeDistRange>
         </li>
 
         <!-- React to close melee threat -->
@@ -32,16 +30,26 @@
           <maxDistance>2.9</maxDistance>
         </li>
 
-        <!-- Wander -->
-        <li Class="JobGiver_WanderAnywhere">
-          <maxDanger>Deadly</maxDanger>
-          <ticksBetweenWandersRange>120~240</ticksBetweenWandersRange>
+        <!-- explode leap a target -->
+        <li Class="JobGiver_AIAbilityFight">
+          <targetAcquireRadius>80</targetAcquireRadius>
+          <targetKeepRadius>100</targetKeepRadius>
+          <ability>IconianLeap_Explode</ability>
+        </li>
+        <li Class="ThinkNode_Tagger">
+          <tagToGive>MiscWork</tagToGive>
+          <subNodes>
+            <li Class="JobGiver_WanderColony">
+              <maxDanger>Deadly</maxDanger>
+              <reportStringOverride>Patrolling.</reportStringOverride>
+            </li>
+          </subNodes>
         </li>
       </subNodes>
     </thinkRoot>
   </ThinkTreeDef>
   <ThinkTreeDef>
-    <defName>MechConstant</defName>
+    <defName>BomberConstant</defName>
     <thinkRoot Class="ThinkNode_Priority">
       <subNodes>
 
@@ -50,27 +58,19 @@
           <treeDef>Despawned</treeDef>
         </li>
 
-        <!-- Non-player mechs -->
-        <li Class="ThinkNode_ConditionalPlayerMech">
-          <invert>true</invert>
+        <li Class="ThinkNode_ConditionalCanDoConstantThinkTreeJobNow">
           <subNodes>
-            <li Class="ThinkNode_ConditionalCanDoConstantThinkTreeJobNow">
+            <!-- Spawn mecs -->
+            <li Class="ThinkNode_ConditionalHasTarget">
               <subNodes>
-
-
-                <!-- Spawn mecs -->
-                <li Class="ThinkNode_ConditionalHasTarget">
-                  <subNodes>
-                    <li Class="JobGiver_AIAbilityFight">
-                      <targetAcquireRadius>80</targetAcquireRadius>
-                      <targetKeepRadius>100</targetKeepRadius>
-                      <ability>IconianLeap_Explode</ability>
-                    </li>
-                  </subNodes>
+                <li Class="JobGiver_AIAbilityFight">
+                  <targetAcquireRadius>80</targetAcquireRadius>
+                  <targetKeepRadius>100</targetKeepRadius>
+                  <ability>IconianLeap_Explode</ability>
                 </li>
-
               </subNodes>
             </li>
+
           </subNodes>
         </li>
       </subNodes>

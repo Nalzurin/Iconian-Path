@@ -26,7 +26,7 @@
         </li>
       </lifeStageAges>
       <thinkTreeMain>Iconian_Bomber</thinkTreeMain>
-      <thinkTreeConstant>MechConstant</thinkTreeConstant>
+      <thinkTreeConstant>BomberConstant</thinkTreeConstant>
       <mechFixedSkillLevel>5</mechFixedSkillLevel>
     </race>
     <comps Inherit="False">

@@ -13,6 +13,7 @@ namespace IconianPsycasts
         public static ThingDef Iconian_Minefield;
         public static ThingDef Iconian_Turret;
         public static ThingDef Iconian_ScrapPile;
-        public static JobDef Iconian_HaulToEat;
+        public static JobDef Iconian_EatThingForced;
+        public static JobDef Iconian_EatThing;
     }
 }

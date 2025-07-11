@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
 
-namespace IconianPsycasts.TrashEater
+namespace IconianPsycasts
 {
     [StaticConstructorOnStartup]
     public class TrashEaterGizmo : Gizmo

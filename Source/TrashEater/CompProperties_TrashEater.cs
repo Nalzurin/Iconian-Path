@@ -14,7 +14,7 @@ namespace IconianPsycasts
         public int spawnAbilityCooldownTicks = 300;
         public ThingDef thingToEat;
         public string gizmoIcon;
-        CompProperties_TrashEater()
+        public CompProperties_TrashEater()
         {
             compClass = typeof(CompTrashEater);
         }

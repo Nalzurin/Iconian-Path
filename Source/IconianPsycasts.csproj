@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ability_AmbushPortal.cs" />
+    <Compile Include="HarmonyPatches\Patch_InMechanitorCommandRange.cs" />
     <Compile Include="Minefield\Ability_Minefield.cs" />
     <Compile Include="RerollBackgroundTrait\Ability_RerollBackgroundTrait.cs" />
     <Compile Include="Ability_SummonThing.cs" />
@@ -115,7 +116,10 @@
     <Compile Include="RerollBackgroundTrait\RerollExtension.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="RerollBackgroundTrait\Dialog_SelectTrait.cs" />
-    <Compile Include="TrashEater\JobDriver_HaulToEat.cs" />
+    <Compile Include="TrashEater\JobDriver_EatThingForced.cs" />
+    <Compile Include="TrashEater\JobDriver_EatThing.cs" />
+    <Compile Include="TrashEater\Pawn_Summoned.cs" />
+    <Compile Include="TrashEater\ThinkNode_ConditionalNeedsToEat.cs" />
     <Compile Include="TrashEater\TrashEaterGizmo.cs" />
     <Compile Include="TrashEater\JobGiver_TrashEater.cs" />
   </ItemGroup>

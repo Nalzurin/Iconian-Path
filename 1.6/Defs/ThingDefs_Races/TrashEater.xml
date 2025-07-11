@@ -1,45 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
   <!--Trash Mob-->
-  <ThingDef ParentName="LightMechanoid">
+  <ThingDef ParentName="AnimalThingBase">
     <defName>Iconian_TrashEater</defName>
+    <thingClass>IconianPsycasts.Pawn_Summoned</thingClass>
     <label>trasheater</label>
     <description>trasheater</description>
     <statBases>
+      <ToxicResistance>1</ToxicResistance>
+      <PsychicSensitivity>0</PsychicSensitivity>
+      <Flammability>0</Flammability>
+      <MeatAmount>0</MeatAmount>
+      <LeatherAmount>0</LeatherAmount>
+      <ArmorRating_Heat>2.00</ArmorRating_Heat>
+      <Wildness>0</Wildness>
       <MoveSpeed>5.0</MoveSpeed>
     </statBases>
+    <uiIconScale>1.5</uiIconScale>
+    <tradeTags>
+      <li>NonContractable</li>
+    </tradeTags>
     <race>
+      <intelligence>ToolUser</intelligence>
+      <canBePredatorPrey>false</canBePredatorPrey>
+      <herdMigrationAllowed>false</herdMigrationAllowed>
+      <giveNonToolUserBeatFireVerb>true</giveNonToolUserBeatFireVerb>
+      <canReleaseToWild>false</canReleaseToWild>
+      <trainability>None</trainability>
+      <showTrainables>false</showTrainables>
+      <playerCanChangeMaster>false</playerCanChangeMaster>
+      <hideTrainingTab>true</hideTrainingTab>
+      <useMeatFrom>Pig</useMeatFrom>
+      <petness>0</petness>
+      <hediffGiverSets Inherit="False"/>
+      <needsRest>false</needsRest>
+      <hasGenders>false</hasGenders>
+      <soundMeleeHitPawn>Pawn_Melee_SmallScratch_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_SmallScratch_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_SmallScratch_Miss</soundMeleeMiss>
+      <bloodDef>VPE_Filth_Metal</bloodDef>
+      <body>VPE_MetalConstructBody</body>
+      <fleshType>VPE_SteelConstructFlesh</fleshType>
+      <thinkTreeMain>Iconian_TrashEater</thinkTreeMain>
       <lifeStageAges>
         <li>
-          <def>MechanoidFullyFormed</def>
           <minAge>0</minAge>
-          <soundWounded>Pawn_Mech_Militor_Wounded</soundWounded>
-          <soundDeath>Pawn_Mech_Militor_Death</soundDeath>
-          <soundCall>Pawn_Mech_Militor_Call</soundCall>
-        </li>
-        <li>
-          <def>MechanoidFullyFormed</def>
-          <minAge>100</minAge>
-          <soundWounded>Pawn_Mech_Militor_Wounded</soundWounded>
-          <soundDeath>Pawn_Mech_Militor_Death</soundDeath>
-          <soundCall>Pawn_Mech_Militor_Call</soundCall>
+          <def>AnimalAdult</def>
+          <soundAngry>VPE_Pawn_SteelConstruct_Angry</soundAngry>
+          <soundWounded>VPE_Pawn_SteelConstruct_Wounded</soundWounded>
+          <soundDeath>VPE_Pawn_SteelConstruct_Death</soundDeath>
+          <soundCall>VPE_Pawn_SteelConstruct_Call</soundCall>
         </li>
       </lifeStageAges>
-      <thinkTreeMain>Mechanoid</thinkTreeMain>
-      <thinkTreeConstant>MechConstant</thinkTreeConstant>
-      <mechFixedSkillLevel>5</mechFixedSkillLevel>
+      <soundCallIntervalRange>
+        <min>12000</min>
+        <max>20000</max>
+      </soundCallIntervalRange>
     </race>
-    <comps Inherit="False">
+    <comps>
+      <li Class="VEF.AnimalBehaviours.CompProperties_InitialHediff">
+        <hediffname>VPE_NoPain</hediffname>
+        <hediffseverity>1</hediffseverity>
+      </li>
+      <li Class="VEF.AnimalBehaviours.CompProperties_Draftable">
+        <makeNonFleeingToo>true</makeNonFleeingToo>
+      </li>
       <li Class="IconianPsycasts.CompProperties_TrashEater">
         <maxStored>4</maxStored>
-        <pawnToSpawn>Iconian_TrashMob</pawnToSpawn>
+        <pawnToSpawn>Iconian_Bomber</pawnToSpawn>
         <spawnAbilityCooldownTicks>300</spawnAbilityCooldownTicks>
         <thingToEat>Iconian_ScrapPile</thingToEat>
         <gizmoIcon>Abilities/Iconian/DeployMilitors</gizmoIcon>
       </li>
+      <li Class="VanillaPsycastsExpanded.CompProperties_BreakLink">
+        <gizmoImage>Effects/Technomancer/BreakLink/BreakLinkSteelConstruct</gizmoImage>
+        <gizmoLabel>VPE_BreakLink</gizmoLabel>
+        <gizmoDesc>VPE_BreakLinkDesc</gizmoDesc>
+      </li>
+      <li Class="VEF.AnimalBehaviours.CompProperties_DiseaseImmunity">
+        <hediffsToRemove>
+          <li>Animal_Plague</li>
+          <li>Animal_Flu</li>
+          <li>AB_AnimalSporesAllergy</li>
+        </hediffsToRemove>
+        <tickInterval>2000</tickInterval>
+      </li>
+      <li Class="VEF.AnimalBehaviours.CompProperties_DiseaseEventImmunity"/>
     </comps>
+    <tools>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>12</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+
+      </li>
+    </tools>
   </ThingDef>
-  <PawnKindDef ParentName="LightMechanoidKind">
+  <PawnKindDef ParentName="AnimalKindBase">
     <defName>Iconian_TrashEater</defName>
     <label>trasheater</label>
     <labelPlural>trasheaters</labelPlural>
@@ -47,6 +109,13 @@
     <descriptionHyperlinks Inherit='False'>
       <ThingDef>Iconian_TrashEater</ThingDef>
     </descriptionHyperlinks>
+    <defaultFactionDef>PlayerColony</defaultFactionDef>
+    <weaponMoney>9999~9999</weaponMoney>
+    <aiAvoidCover>true</aiAvoidCover>
+    <destroyGearOnDrop>true</destroyGearOnDrop>
+    <canStrip>false</canStrip>
+    <forceNormalGearQuality>true</forceNormalGearQuality>
+    <combatPower>100</combatPower>
     <lifeStages>
       <li>
         <bodyGraphicData>
@@ -61,24 +130,11 @@
           </shadowData>
         </bodyGraphicData>
       </li>
-      <li>
-        <bodyGraphicData>
-          <texPath>Things/Pawn/Mechanoid/MilitorAncient</texPath>
-          <maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Mech_Slugger</maskPath>
-          <shaderType>CutoutWithOverlay</shaderType>
-          <graphicClass>Graphic_Multi</graphicClass>
-          <drawSize>1.25</drawSize>
-          <shadowData>
-            <volume>(0.3, 0.4, 0.3)</volume>
-            <offset>(0,0,-0.25)</offset>
-          </shadowData>
-        </bodyGraphicData>
-      </li>
     </lifeStages>
     <allowInMechClusters>false</allowInMechClusters>
     <forceNoDeathNotification>true</forceNoDeathNotification>
     <weaponTags>
-      <li>IconianTrashEaterGun</li>
+      <li>MechanoidGunShortRange</li>
     </weaponTags>
   </PawnKindDef>
 </Defs>
