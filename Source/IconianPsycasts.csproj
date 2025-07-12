@@ -71,9 +71,11 @@
     <Reference Include="VanillaPsycastsExpanded, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\workshop\content\294100\2842502659\1.6\Assemblies\VanillaPsycastsExpanded.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="VEF">
       <HintPath>..\..\..\..\..\workshop\content\294100\2023507013\1.6\Assemblies\VEF.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -109,7 +111,6 @@
     <Compile Include="DefOfs.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Minefield\Iconian_Minefield.cs" />
-    <Compile Include="Minefield\JobGiver_FollowEnemy.cs" />
     <Compile Include="Mod.cs" />
     <Compile Include="PortalExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

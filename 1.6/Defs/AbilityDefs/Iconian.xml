@@ -180,6 +180,7 @@
       </li>
     </modExtensions>
   </VEF.Abilities.AbilityDef>
+  
   <VEF.Abilities.AbilityDef>
     <defName>Iconian_Minefield</defName>
     <label>mine field</label>
@@ -187,15 +188,8 @@
     <iconPath>Abilities/Iconian/AmbushPortal</iconPath>
     <abilityClass>IconianPsycasts.Ability_Minefield</abilityClass>
     <castTime>300</castTime>
-    <durationTime>2700</durationTime>
-    <durationTimeStatFactors>
-      <PsychicSensitivity>1.3</PsychicSensitivity>
-    </durationTimeStatFactors>
     <range>45.9</range>
-    <radius>15.9</radius>
-    <radiusStatFactors>
-      <PsychicSensitivity>1.3</PsychicSensitivity>
-    </radiusStatFactors>
+    <radius>4.9</radius>
     <targetMode>Location</targetMode>
     <modExtensions>
       <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">

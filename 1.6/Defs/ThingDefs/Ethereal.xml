@@ -7,8 +7,20 @@
     <tickerType>Normal</tickerType>
     <drawerType>RealtimeOnly</drawerType>
     <drawOffscreen>true</drawOffscreen>
-    <seeThroughFog>true</seeThroughFog>
-    <alwaysFlee>false</alwaysFlee>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MotePsychicSkipInner</shaderType>
+      <texPath>Things/Mote/SkipInnerDimension</texPath>
+      <shaderParameters>
+        <_innerRingSize>0.65</_innerRingSize>
+        <_inTime>0.0</_inTime>
+        <_solidTime>2</_solidTime>
+        <_outTime>0.0</_outTime>
+        <AgeSecs>1</AgeSecs>
+      </shaderParameters>
+      <drawSize>13.6</drawSize>
+      <color>(1, 1, 1, 0.8)</color>
+    </graphicData>
   </ThingDef>
- 
 </Defs>

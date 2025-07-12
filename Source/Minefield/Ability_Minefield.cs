@@ -6,12 +6,35 @@ using System.Text;
 using System.Threading.Tasks;
 using Verse;
 using VEF.Abilities;
+using VanillaPsycastsExpanded;
+using VanillaPsycastsExpanded.Staticlord;
 
 namespace IconianPsycasts
 {
     [StaticConstructorOnStartup]
-    public class Ability_Minefield : Ability
+    public class Ability_Minefield : Ability, IAbilityToggle, IChannelledPsycast
     {
+        private Iconian_Minefield minefield;
+        public bool IsActive => minefield?.Spawned ?? false;
+        public bool Toggle
+        {
+            get
+            {
+                return minefield?.Spawned ?? false;
+            }
+            set
+            {
+                if (value)
+                {
+                    DoAction();
+                }
+                else
+                {
+                    minefield?.Destroy();
+                }
+            }
+        }
+        public string OffLabel => "Iconian_StopMinefield".Translate();
         public override void Cast(params GlobalTargetInfo[] targets)
         {
             base.Cast(targets);
@@ -21,13 +44,23 @@ namespace IconianPsycasts
                 GlobalTargetInfo globalTargetInfo = targets[i];
                 Log.Message("Test1");
 
-                Iconian_Minefield minefield = (Iconian_Minefield)GenSpawn.Spawn(DefOfs.Iconian_Minefield, globalTargetInfo.Cell, globalTargetInfo.Map);
+                minefield = (Iconian_Minefield)ThingMaker.MakeThing(DefOfs.Iconian_Minefield);
+                minefield.Pawn = pawn;
+                minefield.ability = this;
+                GenSpawn.Spawn(minefield, globalTargetInfo.Cell, globalTargetInfo.Map);
                 Log.Message("Test2");
 
-                minefield.ticksLeftToDisappear = GetDurationForPawn();
-                minefield.caster = pawn;
-                minefield.radius = GetRadiusForPawn();
+
             }
+        }
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_References.Look(ref minefield, "minefield");
+        }
+        public override Gizmo GetGizmo()
+        {
+            return new Command_AbilityToggle(pawn, this);
         }
     }
 

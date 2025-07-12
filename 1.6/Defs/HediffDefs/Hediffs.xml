@@ -46,4 +46,28 @@
       </li>
     </comps>
   </HediffDef>
+
+  <HediffDef>
+    <defName>Iconian_MinefieldDebuff</defName>
+    <label>debuff</label>
+    <hediffClass>HediffWithComps</hediffClass>
+    <description>placeholder.</description>
+    <isBad>true</isBad>
+    <minSeverity>0.1</minSeverity>
+    <stages>
+      <li>
+        <statFactors>
+          <IncomingDamageFactor>1.15</IncomingDamageFactor>
+        </statFactors>
+        <multiplyStatChangesBySeverity>true</multiplyStatChangesBySeverity>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_DisappearsOnDeath" />
+      <li Class="HediffCompProperties_Disappears">
+        <showRemainingTime>True</showRemainingTime>
+        <disappearsAfterTicks>120</disappearsAfterTicks>
+      </li>
+    </comps>
+  </HediffDef>
 </Defs>
